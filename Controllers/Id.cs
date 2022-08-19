@@ -11,6 +11,6 @@ public class Id : ControllerBase
     //Get: /Id
     public IEnumerable<string> Get()
     {
-        return new List<string> {"Hello world", "I am a sample controller"};
+        return new List<string>() { "value1", "value2" };
     }
 }
