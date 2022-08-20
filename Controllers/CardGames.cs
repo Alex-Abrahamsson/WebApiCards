@@ -1,15 +1,15 @@
 using Microsoft.AspNetCore.Mvc;
 
 namespace webapicards.Controllers;
-
 [ApiController]
 [Route("[controller]")]
 
 public class CardGames : ControllerBase
 {
+
     [HttpGet("{gameName}", Name = "Game")]
     //Get: /Game/{gameName}
-    public IEnumerable<string> Get(string gameName)
+    public IEnumerable<Card> Get(string gameName)
     {
         switch (gameName)
         {
@@ -19,9 +19,9 @@ public class CardGames : ControllerBase
                 Card bjCard = BjDeck.Deal();
                 Card bjCard2 = BjDeck.Deal();
                 int sum = bjCard.value + bjCard2.value;
-                return new List<string>() {$"{bjCard} {bjCard2} {sum}"};
+                return new List<Card>() {bjCard, bjCard2};
             case "Poker":
-                return new List<string>() {"Playing Poker"};
+                return new List<Card>() {new Card("Test",1), new Card("Test", 2), new Card("Test", 3), new Card("Test", 4), new Card("Test", 5)};
             case "HighestCard":
                 Deck deck = new Deck();
                 deck.Shuffle();
@@ -29,41 +29,25 @@ public class CardGames : ControllerBase
                 Card card2 = deck.Deal();
                 if (card.value > card2.value)
                 {
-                    return new List<string>() {$"A fresh deck of cards are made","The dealer shuffles the deck","The dealer deals 1 card to the player and 1 card to himself","Player 1 wins with -{card.ToString()}- Over -{card2.ToString()}"};
+                    return new List<Card>() {card, card2};
                 }
                 else if (card.value < card2.value)
                 {
-                    return new List<string>() {$"Player 2 wins with *{card2.ToString()}* Over *{card.ToString()}*"};
+                    return new List<Card>() {card2, card};
                 }
                 else
                 {
-                    return new List<string>() {$"{card.ToString()} and {card2.ToString()} are equal"};
+                    return new List<Card>() {card, card2};
                 }
             default:
-                return new List<string>() {"Invalid game name"};
+                return new List<Card>() {new Card("Test", 4)};
         }
     }
+    
 
 
 
 
 
-    static void PlayHighestCard()
-    { 
-        Deck deck = new Deck();
-        deck.Shuffle();
-        Console.WriteLine($"There are {deck.RemainingCards()} cards left in the deck.");
-        Card card = deck.Deal();
-        Console.WriteLine($"The top card is {card}.");
-        Console.WriteLine($"There are {deck.RemainingCards()} cards left in the deck.");
-        Console.ReadLine();
-        Card card2 = deck.Deal();
-        Console.WriteLine($"The top card is {card2}.");
-        Console.WriteLine($"There are {deck.RemainingCards()} cards left in the deck.");
-        Console.ReadLine();
-        // get sum of card 3 and card 4
-        int sum = card.value + card2.value;
-        Console.WriteLine($"The sum of the cards is {sum}.");
-        Console.ReadLine();
-    }
+
 }
