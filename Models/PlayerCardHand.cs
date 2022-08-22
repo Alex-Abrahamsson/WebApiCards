@@ -1,10 +1,12 @@
 
 public class PlayerCardHand
 {
+    public string playerName { get; set; }
     public List<Card> cards { get; set; }
     public int sum { get; set; }
-    public PlayerCardHand()
+    public PlayerCardHand(string playerName)
     {
+        this.playerName = playerName;
         cards = new List<Card>();
     }
     public void AddCard(Card card)
@@ -16,5 +18,9 @@ public class PlayerCardHand
     {
         cards.Remove(card);
         sum -= card.value;
+    }
+    public void SortCards()
+    {
+        cards.Sort((x, y) => x.value.CompareTo(y.value));
     }
 }
