@@ -25,22 +25,17 @@ public class CardGames : ControllerBase
             case "HighestCard":
                 Deck deck = new Deck();
                 deck.Shuffle();
-                Card card = deck.Deal();
-                Card card2 = deck.Deal();
-                if (card.value > card2.value)
+                PlayerCardHand playerHand = new PlayerCardHand();
+                PlayerCardHand computerHand = new PlayerCardHand();
+                for (int i = 0; i < 5; i++)
                 {
-                    return new List<Card>() {card, card2};
+                    playerHand.AddCard(deck.Deal());
+                    computerHand.AddCard(deck.Deal());
                 }
-                else if (card.value < card2.value)
-                {
-                    return new List<Card>() {card2, card};
-                }
-                else
-                {
-                    return new List<Card>() {card, card2};
-                }
+                
+                return new List<Card>() {playerHand.cards[0], computerHand.cards[0]};
             default:
-                return new List<Card>() {new Card("Test", 4)};
+                return new List<Card>() {new Card("ERROR", 4)};
         }
     }
     
