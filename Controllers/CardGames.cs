@@ -23,27 +23,35 @@ public class CardGames : ControllerBase
                 return new PlayerCardHand[] { bjPlayer };
             case "Poker":
                 return new List<PlayerCardHand>() { new PlayerCardHand("Poker"), new PlayerCardHand("Test") };
-            case "HighestCard":
-                Deck deck = new Deck();
-                deck.Shuffle();
-                PlayerCardHand playerHand = new PlayerCardHand("Player");
-                PlayerCardHand computerHand = new PlayerCardHand("Computer");
-                for (int i = 0; i < 5; i++)
-                {
-                    playerHand.AddCard(deck.Deal());
-                    computerHand.AddCard(deck.Deal());
-                }
-                playerHand.SortCards();
-                computerHand.SortCards();
-                
-                return new List<PlayerCardHand>() {playerHand, computerHand};
+            case "HighestCard":            
+                return PlayHighestCard(5);
             default:
-                return new List<PlayerCardHand>() {new PlayerCardHand("Apskalle"), new PlayerCardHand("mjaaao")};
+                return new List<PlayerCardHand>() {new PlayerCardHand("None"), new PlayerCardHand("None")};
         }
     }
     
 
-
+    public static List<PlayerCardHand> PlayHighestCard(int amountOfCards){
+        Deck deck = new Deck();
+        deck.Shuffle();
+        PlayerCardHand playerHand = new PlayerCardHand("Player");
+        PlayerCardHand computerHand = new PlayerCardHand("Computer");
+        for (int i = 0; i < amountOfCards; i++)
+        {
+            playerHand.AddCard(deck.Deal());
+            computerHand.AddCard(deck.Deal());
+        }
+        playerHand.SortCards();
+        computerHand.SortCards();
+        if (playerHand.GetHighestCard().value > computerHand.GetHighestCard().value)
+        {
+            return new List<PlayerCardHand>() { playerHand, computerHand };
+        }
+        else
+        {
+            return new List<PlayerCardHand>() { computerHand, playerHand };
+        }
+    }
 
 
 

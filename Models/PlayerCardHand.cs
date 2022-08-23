@@ -23,4 +23,9 @@ public class PlayerCardHand
     {
         cards.Sort((x, y) => x.value.CompareTo(y.value));
     }
+    public Card GetHighestCard()
+    {
+        SortCards();
+        return cards[cards.Count - 1];
+    }
 }
