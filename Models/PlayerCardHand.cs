@@ -2,9 +2,9 @@
 public class PlayerCardHand
 {
     public string playerName { get; set; }
-    public List<Card> cards { get; set; }
     public int sum { get; set; }
     public bool isWinner { get; set; }
+    public List<Card> cards { get; set; }
     public PlayerCardHand(string playerName)
     {
         this.playerName = playerName;
