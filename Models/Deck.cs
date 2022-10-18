@@ -7,7 +7,7 @@ public class Deck
     // Create a constructor that populates the list of cards
     public Deck()
     {
-        string[] types = new string[] { "Hearts", "Diamonds", "Clubs", "Spades" };
+        string[] types = new string[] { "♥", "♦", "♣", "♠" };
         for (int i = 0; i < types.Length; i++)
         {
             for (int j = 1; j < 14; j++)

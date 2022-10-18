@@ -53,13 +53,15 @@ public class CardGames : ControllerBase
         }
         playerHand.SortCards();
         computerHand.SortCards();
-        if (playerHand.GetHighestCard().value > computerHand.GetHighestCard().value)
+        var playerHighest = playerHand.cards[playerHand.cards.Count - 1].value;
+        var computerHighest = computerHand.cards[computerHand.cards.Count - 1].value;
+        if (playerHighest > computerHighest)
         {
             playerHand.isWinner = true;
             computerHand.isWinner = false;
             return new List<PlayerCardHand> { playerHand, computerHand };
         }
-        else if (computerHand.GetHighestCard().value > computerHand.GetHighestCard().value)
+        else if (computerHighest > playerHighest)
         {
             playerHand.isWinner = false;
             computerHand.isWinner = true;
